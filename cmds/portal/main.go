@@ -176,6 +176,7 @@ func initAdmin(tx *db.Session) error {
 // 该函数读取环境变量 IAC_SYS_EMAIL, IAC_SYS_NAME 来获取初始系统用户的 email 和用户名
 // 如果 IAC_SYS_EMAIL 未设置则使用 DefaultSysEmail 邮箱，IAC_SYS_NAME 未设置则使用默认系统用户名
 func initSysUser(tx *db.Session) error {
+        //nolint
 	if ok, err := services.QueryUser(tx).Where("id = ?", consts.SysUserId).Exists(); err != nil {
 		return err
 	} else if ok { // 己存在用户，跳过
@@ -318,6 +319,6 @@ func initTemplates(tx *db.Session) error {
 	return nil
 }
 
-func initSSHKeyPair() error {
+func initSSHKeyPair() error { //nolint
 	return sshkey.InitSSHKeyPair()
 }
